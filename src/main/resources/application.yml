@@ -1,0 +1,67 @@
+## spring-boot
+spring:
+  datasource:
+    name: dataSource
+    jmx-enabled: true
+    hikari:
+      maxLifetime: 1765000 #一个连接的生命时长（毫秒），超时而且没被使用则被释放（retired），缺省:30分钟，建议设置比数据库超时时长少30秒以上
+      maximumPoolSize: 10 #连接池中允许的最大连接数。缺省值：10；推荐的公式：((core_count * 2) + effective_spindle_count)
+
+    tomcat:
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-connect: false
+      test-on-return: false
+      validation-interval: 30000
+      validation-query: SELECT 1
+      time-between-eviction-runs-millis: 30000
+      max-active: 10
+      initial-size: 1
+      max-wait: 10000
+      min-evictable-idle-time-millis: 30000
+      min-idle: 1
+      log-abandoned: false
+      remove-abandoned: true
+      remove-abandoned-timeout: 60
+      jdbc-interceptors: org.apache.tomcat.jdbc.pool.interceptor.ConnectionState;org.apache.tomcat.jdbc.pool.interceptor.StatementFinalizer
+      max-idle: 50
+
+  http:
+      encoding:
+        force: true
+        charset: utf-8
+        enabled: true
+
+  servlet:
+      multipart:
+        max-file-size: 20MB
+        max-request-size: 20MB
+
+  jackson:
+      date-format: yyyy-MM-dd HH:mm:ss
+      time-zone: GMT+8
+
+
+
+server:
+  port: 13097
+  tomcat:
+    uri-encoding: UTF-8
+  servlet:
+    context-path: /
+    session:
+      timeout: 0
+
+
+logging:
+  config: classpath:logback-spring.xml
+
+
+myproject:
+  ftp:
+    ip: localhost
+    port: 21
+    username: test
+    password: test
+    path: /home/ftp/all_files/
+    httpurl: http://118.25.110.85:18085/
